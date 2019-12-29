@@ -1,17 +1,11 @@
-import {useState, useCallback} from 'react';
+import {useMemo, useCallback} from 'react';
 import Map from 'ol/Map';
-import {DragPan, PinchRotate} from 'ol/interaction';
 
 export function useMap({view, layers = []}) {
-    const [map] = useState(new Map({
-        controls: [],
-        interactions: [
-            new PinchRotate(),
-            new DragPan()
-        ],
+    const map = useMemo(() => new Map({
         view,
         layers
-    }));
+    }), [view, ...layers]);
 
     const setRef = useCallback(target => map.setTarget(target), [map]);
 

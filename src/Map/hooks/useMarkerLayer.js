@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import {GeoJSON} from 'ol/format';
@@ -12,7 +12,7 @@ import {stringify} from 'query-string';
 export function useMarkerLayer(uri = '/pins', base = window.location.origin) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [markerSource] = useState(new VectorSource({
+    const markerSource = useMemo(() => new VectorSource({
         format: new GeoJSON(),
         loader: async (extent) => {
             setLoading(true);
@@ -30,7 +30,7 @@ export function useMarkerLayer(uri = '/pins', base = window.location.origin) {
             setLoading(false);
         },
         strategy: bbox
-    }));
+    }), [uri, base]);
     const [markerLayer] = useState(new VectorLayer({source: markerSource}));
 
     return [markerLayer, markerSource, {loading, error}];

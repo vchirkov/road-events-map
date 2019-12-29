@@ -17,14 +17,12 @@ export const App = geolocated({
         isGeolocationEnabled,
         coords,
     } = props;
-    alert('app');
 
     if (!isGeolocationAvailable) return <div>Your browser does not support Geolocation</div>;
     if (!isGeolocationEnabled) return <div>Geolocation is not enabled</div>;
 
 
     if (!coords) return <div>awaiting coords</div>;
-    alert(coords);
     return (
         <div className="app"
              style={{height: '100vh', width: '100%'}}>

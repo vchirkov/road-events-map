@@ -1,21 +1,18 @@
 import './Map.scss';
 
-import React, {useEffect} from 'react';
-import {fromLonLat} from 'ol/proj.js';
+import React, {useEffect, useState} from 'react';
 
 import {useView} from './hooks/useView';
 import {useTileLayer} from './hooks/useTileLayer';
 import {useMarkerLayer} from './hooks/useMarkerLayer';
 import {useMap} from './hooks/useMap';
+import {useLocation} from './hooks/useLocation';
 
 export function Map(props = {}) {
-    const {
-        center = {},
-        zoom = 16
-    } = props;
+    const {zoom = 16} = props;
 
-    const {latitude, longitude} = center || {};
-
+    const [focus, setFocus] = useState(true);
+    const [rotate, setRotate] = useState(true);
     const [view] = useView({zoom});
     const [tileLayer] = useTileLayer();
     const [markerLayer] = useMarkerLayer();
@@ -26,14 +23,9 @@ export function Map(props = {}) {
             markerLayer
         ]
     });
+    useLocation(map, {focus, rotate});
 
-    useEffect(() => {
-        map.getView().setCenter(fromLonLat([longitude, latitude]));
-    }, [longitude, latitude, map]);
-
-    useEffect(() => {
-        view.setZoom(zoom);
-    }, [zoom, view]);
+    useEffect(() => view.setZoom(zoom), [zoom, view]);
 
     return (
         <div className="map"

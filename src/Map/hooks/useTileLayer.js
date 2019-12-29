@@ -1,8 +1,7 @@
-import {useState} from 'react';
+import {useMemo} from 'react';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 
 export function useTileLayer() {
-    const [tileLayer] = useState(new TileLayer({source: new OSM()}));
-    return [tileLayer];
+    return [useMemo(() => new TileLayer({source: new OSM()}), [])];
 }
