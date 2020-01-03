@@ -1,1 +1,13 @@
 @import "~ol/ol.css";
+
+
+.map {
+  .location-control {
+    top: 65px;
+    left: .5em;
+  }
+
+  .ol-touch .location-control {
+    top: 80px;
+  }
+}
