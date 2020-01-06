@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+
+
+.btn {
+  & {
+    padding: $p-secondary;
+    border: 1px solid transparent;
+    user-select: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+  }
+}

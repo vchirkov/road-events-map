@@ -11,7 +11,7 @@ import {
     LOCATION_FOCUS,
     LOCATION_ROTATE,
     LOCATION_DEFAULT
-} from '../util/constants';
+} from '../../common/constants';
 
 import locationIcon from '../resources/location.png';
 

@@ -7,13 +7,13 @@ import {useTileLayer} from './hooks/useTileLayer';
 import {useMarkerLayer} from './hooks/useMarkerLayer';
 import {useMap} from './hooks/useMap';
 import {useLocation} from './hooks/useLocation';
-import {useLocationControl} from './hooks/useLocationControl';
+import {useRoadEventControls} from './hooks/useRoadEventControl';
+import {LocationControl} from './components/LocationControl';
 
 import {
     LOCATION_DEFAULT,
     LOCATION_INACTIVE
-} from './util/constants';
-import {useRoadEventControls} from './hooks/useRoadEventControl';
+} from '../common/constants';
 
 export function Map(props = {}) {
     const {zoom = 16} = props;
@@ -23,7 +23,6 @@ export function Map(props = {}) {
     const [tileLayer] = useTileLayer();
     const [markerLayer] = useMarkerLayer();
     const [locationLayer] = useLocation(view, locationState, setLocationState);
-    const [locationControl] = useLocationControl(locationState, setLocationState);
     const [roadEventControls] = useRoadEventControls();
 
     const [map, {setRef}] = useMap({
@@ -33,10 +32,6 @@ export function Map(props = {}) {
             markerLayer,
             locationLayer
         ],
-        controls: [
-            locationControl,
-            roadEventControls
-        ]
     });
 
     const setLocationInactive = () => setLocationState(LOCATION_INACTIVE);
@@ -48,9 +43,15 @@ export function Map(props = {}) {
     }, [map]);
 
     return (
-        <div className="map"
-             style={{height: '100vh', width: '100%'}}
-             ref={setRef}>
+        <div className="map">
+            <div className="map-block"
+                 style={{height: '100vh', width: '100%'}}
+                 ref={setRef}>
+            </div>
+            <div className="map-bottom-section">
+                <LocationControl onChange={setLocationState}
+                                 state={locationState}/>
+            </div>
         </div>
     );
 }
