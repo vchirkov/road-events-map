@@ -16,4 +16,24 @@
   &.focus {
     outline: 0;
   }
+
+  &-primary {
+    background-color: $color-primary;
+    line-height: $base-line-height;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $font-color-primary;
+    border-radius: $base-line-height / 2 + $p-secondary;
+  }
+
+  &-tertiary {
+    background-color: $color-tertiary;
+    line-height: $base-line-height;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $font-color-primary;
+    border-radius: $base-line-height / 2 + $p-secondary;
+  }
 }

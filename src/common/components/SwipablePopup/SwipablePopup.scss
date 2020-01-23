@@ -1,0 +1,31 @@
+@import "../../scss/variables";
+
+
+.swipable-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  &-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 200%;
+    width: 100%;
+    transform: translate(0, -50%);
+    background-color: $overlay-color;
+    transition: transform $transition-duration, opacity $transition-duration;
+  }
+
+  &-closed {
+    display: none;
+  }
+
+  &-closing &-content {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}

@@ -1,12 +1,30 @@
+$color-light: #ffffff;
+$color-dark: #000000;
+$color-primary: #3bcde2;
+$color-secondary: $color-light;
+$color-tertiary: #6b6b6b;
+$overlay-color: rgba(0, 0, 0, 0.5);
+$box-shadow-color: rgba(0, 0, 0, 0.05);
 
-$primary-color: #3bcde2;
-$light-color: #ffffff;
-$dark-color: #000000;
+$border-color: #ececec;
+
+$font-color-light: #ffffff;
+$font-color-dark: #000000;
+$font-color-primary: #ffffff;
+$font-color-secondary: $font-color-dark;
 
 $font-size-primary: 20px;
+$font-size-lg: 22px;
+$font-size-sm: 16px;
+
+$base-line-height: 24px;
 
 $m-primary: 24px;
 $m-secondary: 16px;
 
 $p-primary: 24px;
 $p-secondary: 16px;
+
+$font-weight-bold: 600;
+
+$transition-duration: 500ms;
