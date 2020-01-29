@@ -1,0 +1,32 @@
+@import "../../common/scss/variables";
+
+.app {
+  & &-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+
+  & &-bottom-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  & &-send-road-event-controls {
+    padding: 0 $p-primary;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & &-submit-road-event,
+  & &-cancel-road-event {
+    margin-bottom: $m-secondary;
+  }
+}

@@ -11,11 +11,11 @@ import {
     LOCATION_FOCUS,
     LOCATION_ROTATE,
     LOCATION_DEFAULT
-} from '../../common/constants';
+} from '../../../common/constants';
 
 import locationIcon from '../resources/location.png';
 
-export function useLocation(view, locationState = LOCATION_DEFAULT, onChange = noop) {
+export function useLocation(view, locationState = LOCATION_DEFAULT) {
 
     const marker = useMemo(() => {
         const markerFeature = new Feature(new Point([0, 0]));

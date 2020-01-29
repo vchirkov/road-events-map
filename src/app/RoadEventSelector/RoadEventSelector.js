@@ -4,7 +4,7 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 import {noop} from 'lodash';
 
-import {Button} from '../../../common/components/Button';
+import {Button} from '../../common/components/Button';
 
 import messages from './resources/messages';
 
@@ -13,7 +13,7 @@ import {
     ROAD_EVENT_SPEED_CAM,
     ROAD_EVENT_ACCIDENT,
     ROAD_EVENT_ROAD_WORKS
-} from '../../../common/constants';
+} from '../../common/constants';
 
 const ROAD_EVENTS = [
     ROAD_EVENT_PATROL,

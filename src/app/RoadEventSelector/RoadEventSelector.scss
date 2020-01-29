@@ -1,4 +1,4 @@
-@import "../../../common/scss/variables";
+@import "../../common/scss/variables";
 
 .road-event-selector {
 
@@ -66,19 +66,19 @@
     background-repeat: no-repeat;
 
     &-patrol {
-      background-image: url('./resources/img/police.svg');
+      background-image: url('resources/img/police.svg');
     }
 
     &-speed_cam {
-      background-image: url('./resources/img/speed-cam.svg');
+      background-image: url('resources/img/speed-cam.svg');
     }
 
     &-accident {
-      background-image: url('./resources/img/car-accident.svg');
+      background-image: url('resources/img/car-accident.svg');
     }
 
     &-road_works {
-      background-image: url('./resources/img/roadworks.svg');
+      background-image: url('resources/img/roadworks.svg');
     }
   }
 

@@ -6,8 +6,8 @@ import {bbox} from 'ol/loadingstrategy';
 import {transformExtent} from 'ol/proj';
 import {IconFeature} from '../../util/IconFeature';
 
-import axios from 'axios';
-import {stringify} from 'query-string';
+import axios from 'axios/index';
+import {stringify} from 'query-string/index';
 
 export function useMarkerLayer(uri = '/pins', base = window.location.origin) {
     const [loading, setLoading] = useState(false);

@@ -1,4 +1,4 @@
-@import "../../../common/scss/variables";
+@import "../../common/scss/variables";
 
 .location-control {
   & {
@@ -19,14 +19,14 @@
   }
 
   &-btn-inactive.btn {
-    background-image: url('./resources/img/location-inactive.svg');
+    background-image: url('resources/img/location-inactive.svg');
   }
 
   &-btn-focus.btn {
-    background-image: url('./resources/img/location-focus.svg');
+    background-image: url('resources/img/location-focus.svg');
   }
 
   &-btn-rotate.btn {
-    background-image: url('./resources/img/location-rotate.svg');
+    background-image: url('resources/img/location-rotate.svg');
   }
 }

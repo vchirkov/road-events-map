@@ -7,7 +7,7 @@ import {
     ROAD_EVENT_SPEED_CAM,
     ROAD_EVENT_ACCIDENT,
     ROAD_EVENT_ROAD_WORKS
-} from '../../common/constants';
+} from '../../../common/constants';
 
 const ROAD_EVENTS = [
     ROAD_EVENT_PATROL,
