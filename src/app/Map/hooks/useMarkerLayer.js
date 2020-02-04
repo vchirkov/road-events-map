@@ -1,4 +1,6 @@
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useEffect} from 'react';
+import useAxios from 'axios-hooks';
+import {stringify} from 'query-string/index';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import {GeoJSON} from 'ol/format';
@@ -6,32 +8,27 @@ import {bbox} from 'ol/loadingstrategy';
 import {transformExtent} from 'ol/proj';
 import {IconFeature} from '../../util/IconFeature';
 
-import axios from 'axios/index';
-import {stringify} from 'query-string/index';
-
 export function useMarkerLayer(uri = '/pins', base = window.location.origin) {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [{data, loading, error}, execute] = useAxios({}, {manual: true});
+
     const markerSource = useMemo(() => new VectorSource({
         format: new GeoJSON(),
         loader: async (extent) => {
-            setLoading(true);
-
-            const url = new URL(uri, base);
-            url.search = stringify({extent: transformExtent(extent, 'EPSG:3857', 'EPSG:4326')});
-            try {
-                const {data} = await axios.get(url.toString());
-                // markerSource.clear();
-                markerSource.addFeatures(data.map(pin => new IconFeature(pin)));
-            } catch (e) {
-                setError(e);
-            }
-
-            setLoading(false);
+            execute({
+                url: `/pins?${stringify({
+                    extent: transformExtent(extent, 'EPSG:3857', 'EPSG:4326')
+                })}`
+            });
         },
         strategy: bbox
     }), [uri, base]);
     const [markerLayer] = useState(new VectorLayer({source: markerSource}));
+
+    useEffect(() => {
+        if (!data) return;
+        // markerSource.clear();
+        markerSource.addFeatures(data.map(pin => new IconFeature(pin)));
+    }, [data]);
 
     return [markerLayer, markerSource, {loading, error}];
 }

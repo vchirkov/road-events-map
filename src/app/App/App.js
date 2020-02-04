@@ -1,7 +1,7 @@
 import './App.scss';
 
 import React, {useState} from 'react';
-import {Route, Switch, useHistory, useLocation} from 'react-router';
+import {Route, Switch, useHistory} from 'react-router';
 import {useIntl} from 'react-intl';
 import {toLonLat} from 'ol/proj';
 
@@ -11,21 +11,25 @@ import {NewRoadEventControl} from '../NewRoadEventControl';
 import {RoadEventSelector} from '../RoadEventSelector';
 import {Button} from '../../common/components/Button';
 
+import {LocationPin} from '../LocationPin';
+
 import {useView} from '../Map/hooks/useView';
+import {useAddPin} from './useAddPin';
 
 import {LOCATION_DEFAULT} from '../../common/constants';
 
 import messages from './resources/messages';
-import {LocationPin} from '../LocationPin';
 
 export function App() {
     const history = useHistory();
     const {formatMessage} = useIntl();
-    const [view] = useView();
     const [locationState, setLocationState] = useState(LOCATION_DEFAULT);
+    const [view] = useView();
+    const [payload, addPin] = useAddPin();
 
-    const handleSubmitRoadEvent = (event) => {
-        const loc = toLonLat(view.getCenter());
+    const handleSubmitRoadEvent = async (type) => {
+        const coordinates = toLonLat(view.getCenter());
+        await addPin({type, coordinates});
         history.push('/');
     };
 
