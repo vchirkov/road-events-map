@@ -1,3 +1,5 @@
+export const REFRESH_INTERVAL = 5 * 1000;
+
 export const LOCATION_INACTIVE = 'inactive';
 export const LOCATION_FOCUS = 'focus';
 export const LOCATION_ROTATE = 'rotate';

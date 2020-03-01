@@ -9,14 +9,16 @@ import {Map} from '../Map';
 import {LocationControl} from '../LocationControl';
 import {NewRoadEventControl} from '../NewRoadEventControl';
 import {RoadEventSelector} from '../RoadEventSelector';
-import {Button} from '../../common/components/Button';
+import {Button} from 'common/components/Button';
 
 import {LocationPin} from '../LocationPin';
 
-import {useView} from '../Map/hooks/useView';
-import {useAddPin} from './useAddPin';
+import {useView} from '../hooks/useView';
+import {useTileLayer} from '../hooks/useTileLayer';
+import {useMarkerLayer} from '../hooks/useMarkerLayer';
+import {useAddPin} from '../hooks/useAddPin';
 
-import {LOCATION_DEFAULT} from '../../common/constants';
+import {LOCATION_DEFAULT} from 'common/constants';
 
 import messages from './resources/messages';
 
@@ -25,7 +27,9 @@ export function App() {
     const {formatMessage} = useIntl();
     const [locationState, setLocationState] = useState(LOCATION_DEFAULT);
     const [view] = useView();
-    const [payload, addPin] = useAddPin();
+    const [tileLayer] = useTileLayer();
+    const [markerLayer] = useMarkerLayer();
+    const [, addPin] = useAddPin();
 
     const handleSubmitRoadEvent = async (type) => {
         const coordinates = toLonLat(view.getCenter());
@@ -37,13 +41,14 @@ export function App() {
         <div className="app"
              style={{height: '100vh', width: '100%'}}>
             <Route path={['/new-road-event/:event', '/']}
-                   render={({match}) => {
-                       return <Map view={view}
-                                   locationState={locationState}
-                                   onLocationStateChange={setLocationState}
-                                   showLocationLayer={!match.params.event}
-                       />;
-                   }}/>
+                   render={({match}) => (
+                       <Map view={view}
+                            tileLayer={tileLayer}
+                            markerLayer={markerLayer}
+                            locationState={locationState}
+                            onLocationStateChange={setLocationState}
+                            showLocationLayer={!match.params.event}/>
+                   )}/>
             <div className="app-overlay">
                 <Switch>
                     <Route path="/new-road-event/:event"
@@ -75,11 +80,11 @@ export function App() {
                            )}/>
                     <Route path="/"
                            render={() => (
-                               <>
+                               <div className="app-initial-controls">
                                    <LocationControl onChange={setLocationState}
                                                     state={locationState}/>
                                    <NewRoadEventControl onNewRoadEvent={() => history.push(`/new-road-event`)}/>
-                               </>
+                               </div>
                            )}/>
                 </Switch>
             </div>

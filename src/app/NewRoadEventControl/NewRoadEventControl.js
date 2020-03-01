@@ -4,7 +4,7 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 import {noop} from 'lodash';
 
-import {Button} from '../../common/components/Button';
+import {Button} from 'common/components/Button';
 
 import messages from './resources/messages';
 

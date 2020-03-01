@@ -3,23 +3,28 @@ import {Geolocation, Feature} from 'ol';
 import {Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource} from 'ol/source';
 import {Point} from 'ol/geom';
-import {Style, Icon} from 'ol/style';
-import {noop} from 'lodash';
+import {Style, Circle, Stroke, Fill} from 'ol/style';
 
 import {
-    LOCATION_INACTIVE,
     LOCATION_FOCUS,
     LOCATION_ROTATE,
     LOCATION_DEFAULT
-} from '../../../common/constants';
-
-import locationIcon from '../resources/location.png';
+} from 'common/constants';
 
 export function useLocation(view, locationState = LOCATION_DEFAULT) {
 
     const marker = useMemo(() => {
         const markerFeature = new Feature(new Point([0, 0]));
-        markerFeature.setStyle(new Style({image: new Icon({src: locationIcon})}));
+        markerFeature.setStyle(new Style({
+            image: new Circle({
+                radius: 14,
+                fill: new Fill({color: '#3bcde2'}),
+                stroke: new Stroke({
+                    color: '#ffffff',
+                    width: 2
+                })
+            })
+        }));
         return markerFeature;
     }, []);
 
@@ -41,15 +46,10 @@ export function useLocation(view, locationState = LOCATION_DEFAULT) {
     };
 
     const updateHeading = () => {
-        if (isNaN(geolocation.getHeading())) return;
-
         const heading = geolocation.getHeading();
 
-        if (locationState === LOCATION_ROTATE) {
+        if (locationState === LOCATION_ROTATE && !isNaN(heading)) {
             view.setRotation(-heading);
-            marker.getStyle().getImage().setRotation(0);
-        } else if (locationState === LOCATION_FOCUS || locationState === LOCATION_INACTIVE) {
-            marker.getStyle().getImage().setRotation(heading);
         }
     };
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import useAxios from 'axios-hooks';
 
 export const useGetUser = (token) => {
@@ -8,7 +8,7 @@ export const useGetUser = (token) => {
     useEffect(() => {
         if (!token) return;
         execute()
-    }, [token]);
+    }, [token, execute]);
 
     return payload && payload.data;
 };

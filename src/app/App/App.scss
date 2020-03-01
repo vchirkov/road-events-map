@@ -1,4 +1,4 @@
-@import "../../common/scss/variables";
+@import "common/scss/variables";
 
 .app {
   & &-overlay {
@@ -28,5 +28,12 @@
   & &-submit-road-event,
   & &-cancel-road-event {
     margin-bottom: $m-secondary;
+  }
+
+  & &-initial-controls .location-control {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(0, -100%);
   }
 }
