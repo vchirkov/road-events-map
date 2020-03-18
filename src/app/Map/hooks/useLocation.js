@@ -59,7 +59,6 @@ export function useLocation(view, locationState = LOCATION_DEFAULT) {
         const coords = geolocation.getPosition();
 
         marker.setGeometry(new Point(coords));
-
         if (locationState === LOCATION_ROTATE || locationState === LOCATION_FOCUS) {
             view.setCenter(coords);
         }
@@ -79,7 +78,7 @@ export function useLocation(view, locationState = LOCATION_DEFAULT) {
             geolocation.setTracking(false);
             geolocation.un('change', update);
         }
-    }, [view, geolocation, marker]);
+    }, [locationState, geolocation, view, marker]);
 
     return [locationLayer];
 }
