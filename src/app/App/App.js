@@ -47,6 +47,7 @@ export function App() {
                             markerLayer={markerLayer}
                             locationState={locationState}
                             onLocationStateChange={setLocationState}
+                            onFeatureSelect={id => history.push(`/road-event/${id}`)}
                             showLocationLayer={!match.params.event}/>
                    )}/>
             <div className="app-overlay">

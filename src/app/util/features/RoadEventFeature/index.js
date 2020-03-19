@@ -33,19 +33,20 @@ function getIcon({type} = {}) {
     }
 }
 
-export function EventFeature(pin) {
-    const feature = new Feature({
-        geometry: new Point(fromLonLat([...pin.location.coordinates]))
-    });
-    const style = new Style({
-        image: new Icon(({
-            anchor: [0.5, 0.5],
-            src: getIcon(pin),
-            size: [76, 76],
-            scale: 0.5
-        }))
-    });
-    feature.setId(pin._id);
-    feature.setStyle(style);
-    return feature;
+export class RoadEventFeature extends Feature {
+    constructor(pin) {
+        super({
+            geometry: new Point(fromLonLat([...pin.location.coordinates])),
+            type: 'road-event'
+        });
+        this.setId(pin._id);
+        this.setStyle(new Style({
+            image: new Icon(({
+                anchor: [0.5, 0.5],
+                src: getIcon(pin),
+                size: [76, 76],
+                scale: 0.5
+            }))
+        }));
+    }
 }

@@ -11,7 +11,7 @@ import {
     LOCATION_DEFAULT
 } from 'common/constants';
 
-export function useLocation(view, locationState = LOCATION_DEFAULT) {
+export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
 
     const marker = useMemo(() => {
         const markerFeature = new Feature(new Point([0, 0]));

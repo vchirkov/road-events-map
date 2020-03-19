@@ -4,7 +4,8 @@ import React, {useEffect} from 'react';
 import {noop} from 'lodash';
 
 import {useMap} from './hooks/useMap';
-import {useLocation} from './hooks/useLocation';
+import {useLocationLayer} from './hooks/useLocationLayer';
+import {useOnFeatureClick} from './hooks/useOnFeatureClick';
 
 import {LOCATION_INACTIVE} from 'common/constants';
 
@@ -16,9 +17,10 @@ export function Map(props) {
         markerLayer,
         showLocationLayer = true,
         showMarkerLayer = true,
-        onLocationStateChange = noop
+        onLocationStateChange = noop,
+        onFeatureSelect,
     } = props;
-    const [locationLayer] = useLocation(view, locationState);
+    const [locationLayer] = useLocationLayer(view, locationState);
 
     const [map, {setRef}] = useMap({
         view,
@@ -28,6 +30,8 @@ export function Map(props) {
             locationLayer
         ],
     });
+
+    useOnFeatureClick(map, onFeatureSelect);
 
     useEffect(() => {
         const setLocationInactive = () => onLocationStateChange(LOCATION_INACTIVE);

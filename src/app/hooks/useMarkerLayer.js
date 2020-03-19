@@ -6,7 +6,7 @@ import VectorSource from 'ol/source/Vector';
 import {GeoJSON} from 'ol/format';
 import {containsExtent} from 'ol/extent';
 import {transformExtent} from 'ol/proj';
-import {EventFeature} from '../util/features/EventFeature';
+import {RoadEventFeature} from '../util/features/RoadEventFeature';
 import useInterval from '@use-it/interval';
 
 import {REFRESH_INTERVAL} from 'common/constants';
@@ -33,7 +33,8 @@ export function useMarkerLayer() {
         strategy: (extent) => [extent],
 
     }), [execute]);
-    const [markerLayer] = useState(new VectorLayer({source: markerSource}));
+    const [markerLayer] = useState(() => new VectorLayer({source: markerSource}));
+
     const refresh = () => {
         clearMarkerSource(markerSource);
         markerSource.refresh();
@@ -41,7 +42,7 @@ export function useMarkerLayer() {
 
     useEffect(() => {
         if (!data) return;
-        markerSource.addFeatures(data.map(pin => new EventFeature(pin)));
+        markerSource.addFeatures(data.map(pin => new RoadEventFeature(pin)));
     }, [data, markerSource]);
 
     useInterval(refresh, REFRESH_INTERVAL);
