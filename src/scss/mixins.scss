@@ -1,0 +1,19 @@
+@import "./variables";
+
+@mixin road-event-background-image() {
+  &-patrol {
+    background-image: url('./img/police.svg');
+  }
+
+  &-speed_cam {
+    background-image: url('./img/speed-cam.svg');
+  }
+
+  &-accident {
+    background-image: url('./img/car-accident.svg');
+  }
+
+  &-road_works {
+    background-image: url('./img/roadworks.svg');
+  }
+}

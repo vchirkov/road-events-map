@@ -1,10 +1,11 @@
+import './index.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from 'react-intl';
 import {BrowserRouter as Router} from 'react-router-dom';
-import './index.scss';
-import {AxiosProvider} from './app/Axios';
-import {AuthProvider} from './app/Auth';
+import {AxiosProvider} from './providers/AxiosProvider';
+import {AuthProvider} from './providers/AuthProvider';
 import {App} from './app/App';
 
 ReactDOM.render((

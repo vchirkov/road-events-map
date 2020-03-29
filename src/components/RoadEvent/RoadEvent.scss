@@ -1,0 +1,66 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.road-event {
+
+  & {
+    background-color: $color-secondary;
+    box-shadow: 0 8px 10px 0 $box-shadow-color;
+  }
+
+  & &-heading {
+    background-position: $p-secondary center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: $p-tertiary 0 $p-tertiary ($p-primary + $event-icon-size-lg);
+    font-size: $font-size-lg;
+    margin: $m-secondary;
+
+    @include road-event-background-image;
+  }
+
+  & &-info {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-light;
+    color: $color-tertiary;
+    margin: 0 $m-secondary;
+    padding: 0 $p-secondary;
+  }
+
+  & &-controls {
+    transform: translate(0, 50%);
+    display: flex;
+  }
+
+  & &-control {
+    border-radius: 32px;
+    margin: 0 $m-secondary;
+  }
+
+  & &-control-comments {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  & &-control:before {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &-control-reject:before {
+    background-image: url('./resources/img/reject.svg');
+  }
+
+  &-control-comments:before {
+    background-image: url('./resources/img/comments.svg');
+  }
+
+  &-control-confirm:before {
+    background-image: url('./resources/img/confirm.svg');
+  }
+}

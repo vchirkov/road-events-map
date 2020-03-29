@@ -5,20 +5,20 @@ import {Route, Switch, useHistory} from 'react-router';
 import {useIntl} from 'react-intl';
 import {toLonLat} from 'ol/proj';
 
-import {Map} from '../Map';
-import {LocationControl} from '../LocationControl';
-import {NewRoadEventControl} from '../NewRoadEventControl';
-import {RoadEventSelector} from '../RoadEventSelector';
-import {Button} from 'common/components/Button';
+import {Map} from '../../components/Map';
+import {LocationControl} from '../../components/LocationControl';
+import {NewRoadEventControl} from '../../components/NewRoadEventControl';
+import {RoadEvent} from '../../components/RoadEvent';
+import {RoadEventSelector} from '../../components/RoadEventSelector';
+import {LocationPin} from '../../components/LocationPin';
+import {Button} from '../../components/Button';
 
-import {LocationPin} from '../LocationPin';
+import {useView} from '../../hooks/map/useView';
+import {useTileLayer} from '../../hooks/map/useTileLayer';
+import {useMarkerLayer} from '../../hooks/map/useMarkerLayer';
+import {useAddPin} from '../../hooks/pins/useAddPin';
 
-import {useView} from '../hooks/useView';
-import {useTileLayer} from '../hooks/useTileLayer';
-import {useMarkerLayer} from '../hooks/useMarkerLayer';
-import {useAddPin} from '../hooks/useAddPin';
-
-import {LOCATION_DEFAULT} from 'common/constants';
+import {LOCATION_DEFAULT} from '../../constants';
 
 import messages from './resources/messages';
 
@@ -28,12 +28,13 @@ export function App() {
     const [locationState, setLocationState] = useState(LOCATION_DEFAULT);
     const [view] = useView();
     const [tileLayer] = useTileLayer();
-    const [markerLayer] = useMarkerLayer();
-    const [, addPin] = useAddPin();
+    const [markerLayer, {refresh}] = useMarkerLayer();
+    const [addPin] = useAddPin();
 
     const handleSubmitRoadEvent = async (type) => {
         const coordinates = toLonLat(view.getCenter());
         await addPin({type, coordinates});
+        refresh();
         history.push('/');
     };
 
@@ -47,13 +48,21 @@ export function App() {
                             markerLayer={markerLayer}
                             locationState={locationState}
                             onLocationStateChange={setLocationState}
-                            onFeatureSelect={id => history.push(`/road-event/${id}`)}
+                            onFeatureSelect={id => history.push(`/road-events/${id}`)}
                             showLocationLayer={!match.params.event}/>
                    )}/>
             <div className="app-overlay">
                 <Switch>
                     <Route path="/new-road-event/:event"
                            component={LocationPin}/>
+                </Switch>
+            </div>
+            <div className="app-top-section">
+                <Switch>
+                    <Route path="/road-events/:id"
+                           render={({match}) => (
+                               <RoadEvent id={match.params.id}/>
+                           )}/>
                 </Switch>
             </div>
             <div className="app-bottom-section">

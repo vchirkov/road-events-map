@@ -1,4 +1,4 @@
-@import "common/scss/variables";
+@import "../../scss/variables";
 
 .app {
   & &-overlay {
@@ -8,6 +8,16 @@
     width: 100vw;
     height: 100vh;
     pointer-events: none;
+  }
+
+
+  & &-top-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
   & &-bottom-section {
