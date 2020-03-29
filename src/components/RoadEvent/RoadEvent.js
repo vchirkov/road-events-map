@@ -1,6 +1,6 @@
 import './RoadEvent.scss';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classnames from 'classnames';
 import {FormattedRelativeTime, useIntl} from 'react-intl';
 
@@ -11,14 +11,14 @@ import {useConfirmPin} from '../../hooks/pins/useConfirmPin';
 
 import messages from './resources/messages';
 
-function When({updatedAt}) {
-    if (!updatedAt) {
+function When({time}) {
+    if (!time) {
         return null;
     }
 
     return (
         <span className="road-event-time">
-            <FormattedRelativeTime value={(updatedAt - Date.now()) / 1000}
+            <FormattedRelativeTime value={(time - Date.now()) / 1000}
                                    numeric="auto"
                                    updateIntervalInSeconds={60}/>
         </span>
@@ -38,17 +38,21 @@ function Who({username}) {
 }
 
 export function RoadEvent({id}) {
+    const [pin, setPin] = useState(null);
     const {formatMessage} = useIntl();
     const [{data, loading, error}] = useGetPin(id);
     const [confirmPin] = useConfirmPin();
 
-    if (!data) {
+    useEffect(() => setPin(data), [data]);
+
+    if (!pin) {
         return null;
     }
 
-    const updatedAt = data?.updated_at;
-    const type = data?.type;
-    const who = data?.from;
+    const createdAt = pin?.created_at;
+    const type = pin?.type;
+    const who = pin?.from;
+
     const classNames = classnames('road-event-heading', {
         [`road-event-heading-${type}`]: type
     });
@@ -60,7 +64,7 @@ export function RoadEvent({id}) {
             </h1>
             <div className="road-event-info">
                 {formatMessage(messages.info, {
-                    when: <When updatedAt={updatedAt}/>,
+                    when: <When time={createdAt}/>,
                     who: <Who username={who?.username}/>
                 })}
             </div>
@@ -70,7 +74,8 @@ export function RoadEvent({id}) {
                 <Button className="road-event-control road-event-control-comments"
                         variant="primary"/>
                 <Button className="road-event-control road-event-control-confirm"
-                        variant="primary"/>
+                        variant="primary"
+                        onClick={() => confirmPin(id).then(({data}) => setPin(data))}/>
             </div>
         </div>
     );

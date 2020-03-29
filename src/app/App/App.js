@@ -38,6 +38,14 @@ export function App() {
         history.push('/');
     };
 
+    const handleShowRoadEvent = (id) => {
+        if (id) {
+            history.push(`/road-events/${id}`);
+        } else {
+            history.push('/');
+        }
+    };
+
     return (
         <div className="app"
              style={{height: '100vh', width: '100%'}}>
@@ -48,7 +56,7 @@ export function App() {
                             markerLayer={markerLayer}
                             locationState={locationState}
                             onLocationStateChange={setLocationState}
-                            onFeatureSelect={id => history.push(`/road-events/${id}`)}
+                            onFeatureSelect={handleShowRoadEvent}
                             showLocationLayer={!match.params.event}/>
                    )}/>
             <div className="app-overlay">
