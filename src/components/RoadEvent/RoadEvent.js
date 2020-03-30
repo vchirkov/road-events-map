@@ -8,6 +8,7 @@ import {Button} from '../Button';
 
 import {useGetPin} from '../../hooks/pins/useGetPin';
 import {useConfirmPin} from '../../hooks/pins/useConfirmPin';
+import {useRejectPin} from '../../hooks/pins/useRejectPin';
 
 import messages from './resources/messages';
 
@@ -42,6 +43,7 @@ export function RoadEvent({id}) {
     const {formatMessage} = useIntl();
     const [{data, loading, error}] = useGetPin(id);
     const [confirmPin] = useConfirmPin();
+    const [rejectPin] = useRejectPin();
 
     useEffect(() => setPin(data), [data]);
 
@@ -70,7 +72,8 @@ export function RoadEvent({id}) {
             </div>
             <div className="road-event-controls">
                 <Button className="road-event-control road-event-control-reject"
-                        variant="danger"/>
+                        variant="danger"
+                        onClick={() => rejectPin(id).then(({data}) => setPin(data))}/>
                 <Button className="road-event-control road-event-control-comments"
                         variant="primary"/>
                 <Button className="road-event-control road-event-control-confirm"
