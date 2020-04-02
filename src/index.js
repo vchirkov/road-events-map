@@ -8,23 +8,27 @@ import {AxiosProvider} from './providers/AxiosProvider';
 import {AuthProvider} from './providers/AuthProvider';
 import {App} from './app/App';
 
+const loc = JSON.stringify(window && window.location, null, '  ');
+const init = JSON.stringify(window.TelegramGameProxy && window.TelegramGameProxy.initParams, null, ' ');
 ReactDOM.render((
-    <Router>
+    <div>
         <h1>Location</h1>
         <div>
-            {JSON.stringify(window && window.location, null, '  ')}
+            {loc}
         </div>
         <br/>
         <h1>TelegramGameProxy</h1>
         <div>
-            {JSON.stringify(window.TelegramGameProxy && window.TelegramGameProxy.initParams, null, ' ')}
+            {init}
         </div>
-        <AxiosProvider>
-            <AuthProvider>
-                <IntlProvider>
-                    <App/>
-                </IntlProvider>
-            </AuthProvider>
-        </AxiosProvider>
-    </Router>
+        <Router>
+            <AxiosProvider>
+                <AuthProvider>
+                    <IntlProvider>
+                        <App/>
+                    </IntlProvider>
+                </AuthProvider>
+            </AxiosProvider>
+        </Router>
+    </div>
 ), document.getElementById('root'));
