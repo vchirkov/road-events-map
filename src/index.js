@@ -10,6 +10,15 @@ import {App} from './app/App';
 
 ReactDOM.render((
     <Router>
+        <h1>Location</h1>
+        <div>
+            {JSON.stringify(window && window.location, null, '  ')}
+        </div>
+        <br/>
+        <h1>TelegramGameProxy</h1>
+        <div>
+            {JSON.stringify(window.TelegramGameProxy && window.TelegramGameProxy.initParams, null, ' ')}
+        </div>
         <AxiosProvider>
             <AuthProvider>
                 <IntlProvider>
