@@ -8,7 +8,6 @@ import {AxiosProvider} from './providers/AxiosProvider';
 import {AuthProvider} from './providers/AuthProvider';
 import {App} from './app/App';
 
-alert(window.location.pathname);
 ReactDOM.render((
     <Router>
         <AxiosProvider>

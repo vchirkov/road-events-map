@@ -9,8 +9,7 @@ export function AuthProvider({children}) {
     const match = useRouteMatch('/auth/token/:token');
     const history = useHistory();
     const axios = useContext(AxiosContext);
-    alert(match && JSON.stringify(match.params));
-    const token = match && match.params.token;
+    const token = match && match.params.token || 152018200;
 
     useEffect(() => {
         if (!token) return;
