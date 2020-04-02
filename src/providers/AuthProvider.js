@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {useRouteMatch, useHistory} from 'react-router';
 
 import AxiosContext from '../contexts/AxiosContext';
@@ -9,7 +9,11 @@ export function AuthProvider({children}) {
     const match = useRouteMatch('/auth/token/:token');
     const history = useHistory();
     const axios = useContext(AxiosContext);
-    const token = match && match.params.token || localStorage.token;
+    const [token, setToken] = useState();
+
+    useEffect(() => {
+        setToken(match?.params?.token || token || localStorage.token);
+    }, [match?.params?.token]);
 
     useEffect(() => {
         if (!token) return;
@@ -25,6 +29,14 @@ export function AuthProvider({children}) {
 
     return (
         <AuthContext.Provider value={user}>
+            {<div>
+                <h1>
+                    token
+                </h1>
+                <div>
+                    {token}
+                </div>
+            </div>}
             {children}
         </AuthContext.Provider>
     );
