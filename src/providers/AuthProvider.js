@@ -9,7 +9,7 @@ export function AuthProvider({children}) {
     const match = useRouteMatch('/auth/token/:token');
     const history = useHistory();
     const axios = useContext(AxiosContext);
-    const token = match && match.params.token || 152018200;
+    const token = match && match.params.token || localStorage.token;
 
     useEffect(() => {
         if (!token) return;

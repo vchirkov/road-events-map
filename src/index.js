@@ -3,7 +3,7 @@ import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {IntlProvider} from 'react-intl';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {HashRouter as Router} from 'react-router-dom';
 import {AxiosProvider} from './providers/AxiosProvider';
 import {AuthProvider} from './providers/AuthProvider';
 import {App} from './app/App';
