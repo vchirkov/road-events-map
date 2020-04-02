@@ -29,14 +29,6 @@ export function AuthProvider({children}) {
 
     return (
         <AuthContext.Provider value={user}>
-            {<div>
-                <h1>
-                    token
-                </h1>
-                <div>
-                    {token}
-                </div>
-            </div>}
             {children}
         </AuthContext.Provider>
     );
