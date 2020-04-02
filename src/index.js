@@ -2,21 +2,15 @@ import './index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntlProvider} from 'react-intl';
-import {BrowserRouter as Router} from 'react-router-dom';
-import {AxiosProvider} from './providers/AxiosProvider';
-import {AuthProvider} from './providers/AuthProvider';
-import {App} from './app/App';
 
-alert(window.location.pathname);
 ReactDOM.render((
-    <Router>
-        <AxiosProvider>
-            <AuthProvider>
-                <IntlProvider>
-                    <App/>
-                </IntlProvider>
-            </AuthProvider>
-        </AxiosProvider>
-    </Router>
+    <div>
+        <div>
+            {JSON.stringify(window && window.location, null, '  ')}
+        </div>
+        <br/>
+        <div>
+            {JSON.stringify(window.TelegramGameProxy && window.TelegramGameProxy.initParams, null, ' ')}
+        </div>
+    </div>
 ), document.getElementById('root'));
