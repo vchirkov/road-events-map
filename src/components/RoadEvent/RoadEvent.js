@@ -19,7 +19,7 @@ function When({time}) {
 
     return (
         <span className="road-event-time">
-            <FormattedRelativeTime value={(time - Date.now()) / 1000}
+            <FormattedRelativeTime value={(time - Date.now()) / 1000 | 0}
                                    numeric="auto"
                                    updateIntervalInSeconds={60}/>
         </span>
@@ -41,7 +41,7 @@ function Who({username}) {
 export function RoadEvent({id}) {
     const [pin, setPin] = useState(null);
     const {formatMessage} = useIntl();
-    const [{data, loading, error}] = useGetPin(id);
+    const [{data}] = useGetPin(id);
     const [confirmPin] = useConfirmPin();
     const [rejectPin] = useRejectPin();
 
