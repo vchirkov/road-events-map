@@ -1,4 +1,5 @@
 import './index.scss';
+import './util/intlPolyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
