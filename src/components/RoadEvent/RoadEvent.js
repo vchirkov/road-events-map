@@ -59,8 +59,30 @@ export function RoadEvent({id}) {
         [`road-event-heading-${type}`]: type
     });
 
+    let intl = null;
+    let rtf = null;
+    let rtf1 = null;
+    let day = null;
+    let err = null;
+
+    try {
+        intl = Intl;
+        rtf = Intl.RelativeTimeFormat;
+        rtf1 = new Intl.RelativeTimeFormat('en', {style: 'narrow'});
+        day = rtf1.format(-1, 'day');
+    } catch (e) {
+        err = e;
+    }
+
     return (
         <div className="road-event">
+            <div>
+                <div>intl: {'' + !!intl}</div>
+                <div>rtf: {'' + !!rtf}</div>
+                <div>rtf1: {'' + !!rtf1}</div>
+                <div>day: {day}</div>
+                <div>err: {err && err.message}</div>
+            </div>
             <h1 className={classNames}>
                 {formatMessage(messages[type])}
             </h1>
