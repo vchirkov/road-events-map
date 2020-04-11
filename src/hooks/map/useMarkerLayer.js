@@ -1,4 +1,4 @@
-import {useMemo, useEffect, useState} from 'react';
+import {useMemo} from 'react';
 import useAxios from 'axios-hooks';
 import {stringify} from 'query-string/index';
 import VectorLayer from 'ol/layer/Vector';
@@ -36,7 +36,7 @@ export function useMarkerLayer() {
 
     const refresh = () => {
         markerSource.loadedExtentsRtree_.clear();
-        markerSource.refresh();
+        markerSource.changed();
     };
 
     useInterval(refresh, REFRESH_INTERVAL);

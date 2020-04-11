@@ -1,9 +1,8 @@
-import {useMemo, useEffect} from 'react';
-import {Geolocation, Feature} from 'ol';
+import {useState, useMemo, useEffect} from 'react';
+import {Geolocation} from 'ol';
 import {Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource} from 'ol/source';
-import {Point} from 'ol/geom';
-import {Style, Circle, Stroke, Fill} from 'ol/style';
+import {MarkerFeature} from '../../util/features/MarkerFeature';
 
 import {
     LOCATION_FOCUS,
@@ -12,26 +11,13 @@ import {
 } from '../../constants';
 
 export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
+    const [marker] = useState(() => new MarkerFeature([0, 0]));
 
-    const marker = useMemo(() => {
-        const markerFeature = new Feature(new Point([0, 0]));
-        markerFeature.setStyle(new Style({
-            image: new Circle({
-                radius: 14,
-                fill: new Fill({color: '#3bcde2'}),
-                stroke: new Stroke({
-                    color: '#ffffff',
-                    width: 2
-                })
-            })
-        }));
-        return markerFeature;
-    }, []);
-
-    const locationLayer = useMemo(() => {
-        if (!marker) return;
-        return new VectorLayer({source: new VectorSource({features: [marker]})});
-    }, [marker]);
+    const locationLayer = useMemo(() => new VectorLayer({
+        source: new VectorSource({
+            features: [marker]
+        })
+    }), [marker]);
 
     const geolocation = useMemo(() => new Geolocation({
         projection: view.getProjection(),
@@ -58,7 +44,7 @@ export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
 
         const coords = geolocation.getPosition();
 
-        marker.setGeometry(new Point(coords));
+        marker.move(coords);
         if (locationState === LOCATION_ROTATE || locationState === LOCATION_FOCUS) {
             view.setCenter(coords);
         }
