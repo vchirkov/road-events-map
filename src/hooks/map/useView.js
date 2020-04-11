@@ -4,8 +4,8 @@ import {sizeToResolution} from '../../util/sizeToResolution';
 
 export function useView() {
     return useState(() => new View({
-        maxResolution: sizeToResolution(1500),
-        minResolution: sizeToResolution(200),
-        resolution: sizeToResolution(300)
+        maxResolution: sizeToResolution(3000),
+        minResolution: sizeToResolution(100),
+        resolution: sizeToResolution(500)
     }));
 }

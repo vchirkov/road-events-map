@@ -4,16 +4,23 @@ import {Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource} from 'ol/source';
 import {MarkerFeature} from '../../util/features/MarkerFeature';
 import {useTrackLocation} from '../useTrackLocation';
+import {DetectorFeature} from '../../util/features/DetectorFeature';
 
 export function useLocationLayer(view) {
     const [{isRotate, isFocus}] = useTrackLocation();
     const [marker] = useState(() => new MarkerFeature([0, 0]));
+    const [detector] = useState(() => new DetectorFeature([0, 0]));
+
+    const features = useMemo(() => {
+        if (!marker || !detector) return;
+        return [marker, detector];
+    }, [marker, detector]);
 
     const locationLayer = useMemo(() => new VectorLayer({
         source: new VectorSource({
-            features: [marker]
+            features
         })
-    }), [marker]);
+    }), [features]);
 
     const geolocation = useMemo(() => new Geolocation({
         projection: view.getProjection(),
@@ -21,7 +28,7 @@ export function useLocationLayer(view) {
     }), [view]);
 
     const update = () => {
-        if (!geolocation || !view || !marker) return;
+        if (!geolocation || !view || !features) return;
 
         updateHeading();
         updatePosition();
@@ -40,17 +47,17 @@ export function useLocationLayer(view) {
 
         const coords = geolocation.getPosition();
 
-        marker.move(coords);
+        features.forEach(f => f.move(coords));
         if (isRotate || isFocus) {
             view.setCenter(coords);
         }
     };
 
 
-    useEffect(update, [isRotate, isFocus, geolocation, view, marker]);
+    useEffect(update, [isRotate, isFocus, geolocation, view, features]);
 
     useEffect(() => {
-        if (!geolocation || !marker) return;
+        if (!geolocation || !features) return;
         geolocation.setTracking(true);
         geolocation.on('change', update);
 
@@ -60,7 +67,7 @@ export function useLocationLayer(view) {
             geolocation.setTracking(false);
             geolocation.un('change', update);
         }
-    }, [isRotate, isFocus, geolocation, view, marker]);
+    }, [isRotate, isFocus, geolocation, view, features]);
 
     return [locationLayer];
 }
