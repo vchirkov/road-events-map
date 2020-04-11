@@ -1,0 +1,27 @@
+@import "../../scss/variables";
+
+
+.geolocation-check {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: $p-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  background: radial-gradient(ellipse at top, #3bcde2, #fff 110%);
+  z-index: 10000;
+
+  & &-message {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  & &-hidden {
+    display: none;
+  }
+}

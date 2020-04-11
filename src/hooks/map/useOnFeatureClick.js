@@ -7,7 +7,11 @@ import {RoadEventFeature} from '../../util/features/RoadEventFeature';
 
 export function useOnFeatureClick(map, onFeatureSelect = noop) {
     useEffect(() => {
-        const select = new Select({filter: feature => feature instanceof RoadEventFeature});
+        const select = new Select({
+            filter: feature => feature instanceof RoadEventFeature,
+            style: false
+        });
+
         select.on('select', (e) => {
             const feature = e.target.getFeatures().item(0);
             const id = feature && feature.getId();

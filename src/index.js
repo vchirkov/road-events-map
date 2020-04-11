@@ -11,6 +11,7 @@ import {AxiosProvider} from './providers/AxiosProvider';
 import {AuthProvider} from './providers/AuthProvider';
 import {LocaleProvider} from './providers/LocaleProvider';
 import {TrackLocationProvider} from './providers/TrackLocationProvider';
+import {GeoLocationCheck} from './components/GeoLocationCheck';
 import {App} from './app/App';
 
 ReactDOM.render((
@@ -19,7 +20,9 @@ ReactDOM.render((
             <AuthProvider>
                 <LocaleProvider>
                     <TrackLocationProvider>
-                        <App/>
+                        <GeoLocationCheck>
+                            <App/>
+                        </GeoLocationCheck>
                     </TrackLocationProvider>
                 </LocaleProvider>
             </AuthProvider>
