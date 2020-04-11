@@ -1,26 +1,24 @@
 import './Map.scss';
 
 import React, {useEffect} from 'react';
-import {noop} from 'lodash';
 
 import {useMap} from '../../hooks/map/useMap';
 import {useLocationLayer} from '../../hooks/map/useLocationLayer';
 import {useOnFeatureClick} from '../../hooks/map/useOnFeatureClick';
 
-import {LOCATION_INACTIVE} from '../../constants';
+import {useTrackLocation} from '../../hooks/useTrackLocation';
 
 export function Map(props) {
     const {
         view,
-        locationState,
         tileLayer,
         markerLayer,
         showLocationLayer = true,
         showMarkerLayer = true,
-        onLocationStateChange = noop,
         onFeatureSelect,
     } = props;
-    const [locationLayer] = useLocationLayer(view, locationState);
+    const [locationLayer] = useLocationLayer(view);
+    const [, {setInactive}] = useTrackLocation();
 
     const [map, {setRef}] = useMap({
         view,
@@ -34,11 +32,9 @@ export function Map(props) {
     useOnFeatureClick(map, onFeatureSelect);
 
     useEffect(() => {
-        const setLocationInactive = () => onLocationStateChange(LOCATION_INACTIVE);
-
-        map.on('pointerdrag', setLocationInactive);
-        return () => map.un('pointerdrag', setLocationInactive);
-    }, [map, onLocationStateChange]);
+        map.on('pointerdrag', setInactive);
+        return () => map.un('pointerdrag', setInactive);
+    }, [map, setInactive]);
 
     useEffect(() => locationLayer.setVisible(showLocationLayer), [locationLayer, showLocationLayer]);
     useEffect(() => markerLayer.setVisible(showMarkerLayer), [markerLayer, showMarkerLayer]);

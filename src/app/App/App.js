@@ -1,6 +1,6 @@
 import './App.scss';
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Route, Switch, useHistory} from 'react-router';
 import {useIntl} from 'react-intl';
 import {toLonLat} from 'ol/proj';
@@ -18,14 +18,11 @@ import {useTileLayer} from '../../hooks/map/useTileLayer';
 import {useMarkerLayer} from '../../hooks/map/useMarkerLayer';
 import {useAddPin} from '../../hooks/pins/useAddPin';
 
-import {LOCATION_DEFAULT} from '../../constants';
-
 import messages from './resources/messages';
 
 export function App() {
     const history = useHistory();
     const {formatMessage} = useIntl();
-    const [locationState, setLocationState] = useState(LOCATION_DEFAULT);
     const [view] = useView();
     const [tileLayer] = useTileLayer();
     const [markerLayer, {refresh}] = useMarkerLayer();
@@ -54,8 +51,6 @@ export function App() {
                        <Map view={view}
                             tileLayer={tileLayer}
                             markerLayer={markerLayer}
-                            locationState={locationState}
-                            onLocationStateChange={setLocationState}
                             onFeatureSelect={handleShowRoadEvent}
                             showLocationLayer={!match.params.event}/>
                    )}/>
@@ -91,17 +86,12 @@ export function App() {
                                </div>
                            )}/>
                     <Route path="/new-road-event"
-                           render={() => (
-                               <RoadEventSelector
-                                   onRoadEventSelected={event => history.push(`/new-road-event/${event}`)}
-                                   onCancel={() => history.push('/')}/>
-                           )}/>
+                           component={RoadEventSelector}/>
                     <Route path="/"
                            render={() => (
                                <div className="app-initial-controls">
-                                   <LocationControl onChange={setLocationState}
-                                                    state={locationState}/>
-                                   <NewRoadEventControl onNewRoadEvent={() => history.push(`/new-road-event`)}/>
+                                   <LocationControl/>
+                                   <NewRoadEventControl/>
                                </div>
                            )}/>
                 </Switch>

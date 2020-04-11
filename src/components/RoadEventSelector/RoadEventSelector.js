@@ -1,8 +1,9 @@
 import './RoadEventSelector.scss';
 
 import React from 'react';
-import {useIntl} from 'react-intl';
 import {noop} from 'lodash';
+import {useIntl} from 'react-intl';
+import {useHistory} from 'react-router';
 
 import {Button} from '../Button';
 
@@ -24,6 +25,7 @@ const ROAD_EVENTS = [
 
 
 export function RoadEventSelector({onRoadEventSelected = noop, onCancel = noop}) {
+    const history = useHistory();
     const {formatMessage} = useIntl();
 
     return (
@@ -37,7 +39,7 @@ export function RoadEventSelector({onRoadEventSelected = noop, onCancel = noop})
                         <div key={event}
                              className="road-event-selector-option">
                             <Button className="road-event-selector-option-control"
-                                    onClick={() => onRoadEventSelected(event)}>
+                                    onClick={() => history.push(`/new-road-event/${event}`)}>
                                 <div className="road-event-selector-option-control-content">
                                     <i className={`road-event-selector-option-control-icon road-event-selector-option-control-icon-${event}`}/>
                                     {formatMessage(messages[event])}
@@ -47,7 +49,7 @@ export function RoadEventSelector({onRoadEventSelected = noop, onCancel = noop})
                     ))}
                 </div>
                 <Button className="road-event-selector-cancel"
-                        onClick={() => onCancel()}>
+                        onClick={() => history.push('/')}>
                     {formatMessage(messages.cancel)}
                 </Button>
             </div>

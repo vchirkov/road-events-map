@@ -2,30 +2,19 @@ import './LocationControl.scss';
 
 import React from 'react';
 import classnames from 'classnames';
-import {noop} from 'lodash';
 
 import {Button} from '../Button';
 
-import {
-    LOCATION_FOCUS,
-    LOCATION_INACTIVE,
-    LOCATION_ROTATE,
-    LOCATION_DEFAULT
-} from '../../constants';
+import {useTrackLocation} from '../../hooks/useTrackLocation';
 
-const STATE_SEQUENCE = {
-    [LOCATION_INACTIVE]: LOCATION_FOCUS,
-    [LOCATION_FOCUS]: LOCATION_ROTATE,
-    [LOCATION_ROTATE]: LOCATION_INACTIVE
-};
-
-export function LocationControl({state = LOCATION_DEFAULT, onChange = noop}) {
+export function LocationControl() {
+    const [{state}, {toggleState}] = useTrackLocation();
     const classNames = classnames('location-control-btn', `location-control-btn-${state}`);
 
     return (
         <div className="location-control">
             <Button className={classNames}
-                    onClick={() => onChange(STATE_SEQUENCE[state])}>
+                    onClick={toggleState}>
             </Button>
         </div>
     );

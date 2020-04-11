@@ -3,14 +3,10 @@ import {Geolocation} from 'ol';
 import {Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource} from 'ol/source';
 import {MarkerFeature} from '../../util/features/MarkerFeature';
+import {useTrackLocation} from '../useTrackLocation';
 
-import {
-    LOCATION_FOCUS,
-    LOCATION_ROTATE,
-    LOCATION_DEFAULT
-} from '../../constants';
-
-export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
+export function useLocationLayer(view) {
+    const [{isRotate, isFocus}] = useTrackLocation();
     const [marker] = useState(() => new MarkerFeature([0, 0]));
 
     const locationLayer = useMemo(() => new VectorLayer({
@@ -34,7 +30,7 @@ export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
     const updateHeading = () => {
         const heading = geolocation.getHeading();
 
-        if (locationState === LOCATION_ROTATE && !isNaN(heading)) {
+        if (isRotate && !isNaN(heading)) {
             view.setRotation(-heading);
         }
     };
@@ -45,13 +41,13 @@ export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
         const coords = geolocation.getPosition();
 
         marker.move(coords);
-        if (locationState === LOCATION_ROTATE || locationState === LOCATION_FOCUS) {
+        if (isRotate || isFocus) {
             view.setCenter(coords);
         }
     };
 
 
-    useEffect(update, [locationState, geolocation, view, marker]);
+    useEffect(update, [isRotate, isFocus, geolocation, view, marker]);
 
     useEffect(() => {
         if (!geolocation || !marker) return;
@@ -64,7 +60,7 @@ export function useLocationLayer(view, locationState = LOCATION_DEFAULT) {
             geolocation.setTracking(false);
             geolocation.un('change', update);
         }
-    }, [locationState, geolocation, view, marker]);
+    }, [isRotate, isFocus, geolocation, view, marker]);
 
     return [locationLayer];
 }
