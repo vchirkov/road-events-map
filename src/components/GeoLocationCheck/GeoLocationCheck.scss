@@ -16,6 +16,10 @@
   background: radial-gradient(ellipse at top, #3bcde2, #fff 110%);
   z-index: 10000;
 
+  & &-header {
+    text-align: center;
+  }
+
   & &-message {
     max-width: 300px;
     text-align: center;
