@@ -1,7 +1,7 @@
 @import "../../scss/variables";
 
 
-.geolocation-check {
+.authentication-check {
   position: fixed;
   left: 0;
   top: 0;
@@ -21,7 +21,12 @@
   }
 
   & &-message {
-    max-width: 300px;
+    max-width: 320px;
     text-align: center;
+    white-space: pre-line;
+  }
+
+  & &-open-bot {
+    margin: $m-primary;
   }
 }

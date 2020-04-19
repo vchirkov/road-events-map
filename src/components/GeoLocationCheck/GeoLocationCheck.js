@@ -5,6 +5,7 @@ import {useIntl} from 'react-intl';
 import classnames from 'classnames';
 
 import messages from './resources/messages';
+import {Loader} from '../Loader';
 
 export function GeoLocationCheck({children}) {
     const {formatMessage} = useIntl();
@@ -32,37 +33,27 @@ export function GeoLocationCheck({children}) {
     return (
         <>
             {children}
-            <div className={classnames('geolocation-check', {'geolocation-check-hidden': allowed})}>
-                {error ? (
-                    <>
-                        <h1 className="geolocation-check-header">
-                            {formatMessage(messages.doesnt_know_location)}
-                        </h1>
-                        <p className="geolocation-check-message">
-                            {formatMessage(messages.allow_in_settings)}
-                        </p>
-                    </>
-                ) : (
-                    <>
-                        <div className="loader">
-                            <div>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                                <div/>
-                            </div>
-                        </div>
-                        <p>
-                            {formatMessage(messages.fetching_position)}
-                        </p>
-                    </>
-                )}
-            </div>
+            {!allowed && (
+                <div className="geolocation-check">
+                    {error ? (
+                        <>
+                            <h1 className="geolocation-check-header">
+                                {formatMessage(messages.doesnt_know_location)}
+                            </h1>
+                            <p className="geolocation-check-message">
+                                {formatMessage(messages.allow_in_settings)}
+                            </p>
+                        </>
+                    ) : (
+                        <>
+                            <Loader/>
+                            <p>
+                                {formatMessage(messages.fetching_position)}
+                            </p>
+                        </>
+                    )}
+                </div>
+            )}
         </>
     );
 }

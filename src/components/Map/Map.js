@@ -7,18 +7,18 @@ import {useLocationLayer} from '../../hooks/map/useLocationLayer';
 import {useOnFeatureClick} from '../../hooks/map/useOnFeatureClick';
 
 import {useTrackLocation} from '../../hooks/useTrackLocation';
+import {useRouteMatch} from 'react-router';
 
 export function Map(props) {
     const {
         view,
         tileLayer,
         markerLayer,
-        showLocationLayer = true,
-        showMarkerLayer = true,
         onFeatureSelect,
     } = props;
     const [locationLayer] = useLocationLayer(view);
     const [, {setInactive}] = useTrackLocation();
+    const match = useRouteMatch('/new-road-event/:event');
 
     const [map, {setRef}] = useMap({
         view,
@@ -36,8 +36,7 @@ export function Map(props) {
         return () => map.un('pointerdrag', setInactive);
     }, [map, setInactive]);
 
-    useEffect(() => locationLayer.setVisible(showLocationLayer), [locationLayer, showLocationLayer]);
-    useEffect(() => markerLayer.setVisible(showMarkerLayer), [markerLayer, showMarkerLayer]);
+    useEffect(() => locationLayer.setVisible(!match?.params?.event), [locationLayer, match?.params?.event]);
 
     return (
         <div className="map">

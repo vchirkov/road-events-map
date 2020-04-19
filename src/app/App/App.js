@@ -46,14 +46,10 @@ export function App() {
     return (
         <div className="app"
              style={{height: '100vh', width: '100%'}}>
-            <Route path={['/new-road-event/:event', '/']}
-                   render={({match}) => (
-                       <Map view={view}
-                            tileLayer={tileLayer}
-                            markerLayer={markerLayer}
-                            onFeatureSelect={handleShowRoadEvent}
-                            showLocationLayer={!match.params.event}/>
-                   )}/>
+            <Map view={view}
+                 tileLayer={tileLayer}
+                 markerLayer={markerLayer}
+                 onFeatureSelect={handleShowRoadEvent}/>
             <div className="app-overlay">
                 <Switch>
                     <Route path="/new-road-event/:event"

@@ -5,10 +5,11 @@ export const useGetUser = (token) => {
     const [payload, execute] = useAxios({
         url: `/user`
     }, {manual: true});
+
     useEffect(() => {
         if (!token) return;
         execute()
     }, [token, execute]);
 
-    return payload && payload.data;
+    return token ? payload?.data : null;
 };
