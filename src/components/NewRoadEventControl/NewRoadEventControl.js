@@ -6,7 +6,7 @@ import {useHistory} from 'react-router';
 
 import {Button} from '../Button';
 
-import messages from './resources/messages';
+import messages from './messages';
 
 export function NewRoadEventControl() {
     const {formatMessage} = useIntl();

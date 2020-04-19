@@ -1,0 +1,23 @@
+{
+  "App.cancel": "Отмена",
+  "App.send_an_event": "Отправить событие",
+  "AuthenticationCheck.authenticating": "Авторизация...",
+  "AuthenticationCheck.cant_authenticate": "Не получается авторизоваться",
+  "AuthenticationCheck.open_bot": "Открыть Бот",
+  "AuthenticationCheck.open_in_telegram": "К сожалению, не получилось авторизоваться \n Пожалуйста, откройте приложение через бота в Telegram",
+  "GeoLocationCheck.allow_in_settings": "Пожалуйста, разрешите доступ к геопозиции для приложения Telegram в настройках и переоткройте приложение",
+  "GeoLocationCheck.doesnt_know_location": "У приложения нет доступа к геопозиции",
+  "GeoLocationCheck.fetching_position": "Получаем геопозицию...",
+  "NewRoadEventControl.new_road_event": "Новое Событие",
+  "RoadEvent.accident": "Авария",
+  "RoadEvent.info": "{when} отметил {who}",
+  "RoadEvent.patrol": "Патруль",
+  "RoadEvent.road_works": "Работы",
+  "RoadEvent.speed_cam": "Камера",
+  "RoadEventSelector.accident": "Авария",
+  "RoadEventSelector.cancel": "Отменить",
+  "RoadEventSelector.choose_event_type": "Выберите тип события",
+  "RoadEventSelector.patrol": "Полиция",
+  "RoadEventSelector.road_works": "Работы",
+  "RoadEventSelector.speed_cam": "Камера"
+}

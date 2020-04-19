@@ -7,7 +7,7 @@ import {useHistory} from 'react-router';
 
 import {Button} from '../Button';
 
-import messages from './resources/messages';
+import messages from './messages';
 
 import {
     ROAD_EVENT_PATROL,

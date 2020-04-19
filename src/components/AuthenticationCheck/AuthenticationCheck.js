@@ -6,7 +6,7 @@ import {useIntl} from 'react-intl';
 import {Loader} from '../Loader';
 import {useIsAuthenticated} from '../../hooks/user/useIsAuthenticated';
 
-import messages from './resources/messages';
+import messages from './messages';
 import {Button} from '../Button';
 
 const {REACT_APP_BOT_URL} = process.env;

@@ -10,7 +10,7 @@ import {useGetPin} from '../../hooks/pins/useGetPin';
 import {useConfirmPin} from '../../hooks/pins/useConfirmPin';
 import {useRejectPin} from '../../hooks/pins/useRejectPin';
 
-import messages from './resources/messages';
+import messages from './messages';
 
 function When({time}) {
     if (!time) {

@@ -18,7 +18,7 @@ import {useTileLayer} from '../../hooks/map/useTileLayer';
 import {useMarkerLayer} from '../../hooks/map/useMarkerLayer';
 import {useAddPin} from '../../hooks/pins/useAddPin';
 
-import messages from './resources/messages';
+import messages from './messages';
 
 export function App() {
     const history = useHistory();

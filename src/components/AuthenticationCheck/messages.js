@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl.macro';
+import {defineMessages} from 'react-intl';
 
 export default defineMessages({
     cant_authenticate: 'Can\'t Authenticate',

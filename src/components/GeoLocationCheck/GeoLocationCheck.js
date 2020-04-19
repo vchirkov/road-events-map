@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {useIntl} from 'react-intl';
 import classnames from 'classnames';
 
-import messages from './resources/messages';
+import messages from './messages';
 import {Loader} from '../Loader';
 
 export function GeoLocationCheck({children}) {

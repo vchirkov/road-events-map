@@ -1,0 +1,23 @@
+{
+  "App.cancel": "Cancel",
+  "App.send_an_event": "Send an event",
+  "AuthenticationCheck.authenticating": "Authenticating...",
+  "AuthenticationCheck.cant_authenticate": "Can't Authenticate",
+  "AuthenticationCheck.open_bot": "Open Bot",
+  "AuthenticationCheck.open_in_telegram": "Unfortunately, we couldn't authenticate you. \n Please open App through Telegram Bot:",
+  "GeoLocationCheck.allow_in_settings": "Please, give Telegram access to geolocation in settings, and reopen app",
+  "GeoLocationCheck.doesnt_know_location": "App doesn't know your location",
+  "GeoLocationCheck.fetching_position": "Fetching Position...",
+  "NewRoadEventControl.new_road_event": "New Road Event",
+  "RoadEvent.accident": "Accident",
+  "RoadEvent.info": "{when} by {who}",
+  "RoadEvent.patrol": "Police",
+  "RoadEvent.road_works": "Roadworks",
+  "RoadEvent.speed_cam": "Camera",
+  "RoadEventSelector.accident": "Accident",
+  "RoadEventSelector.cancel": "Cancel",
+  "RoadEventSelector.choose_event_type": "Choose an Event type",
+  "RoadEventSelector.patrol": "Police",
+  "RoadEventSelector.road_works": "Roadworks",
+  "RoadEventSelector.speed_cam": "Camera"
+}

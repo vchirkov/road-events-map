@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react"
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining",
+    [
+      "react-intl-auto",
+      {
+        "removePrefix": "(src.app|src.components)"
+      }
+    ]
+  ]
+}

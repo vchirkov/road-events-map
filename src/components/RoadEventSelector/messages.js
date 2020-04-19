@@ -1,9 +1,10 @@
-import {defineMessages} from 'react-intl.macro';
+import {defineMessages} from 'react-intl';
 
 export default defineMessages({
-    info: '{when} by {who}',
+    choose_event_type: 'Choose an Event type',
     patrol: 'Police',
     speed_cam: 'Camera',
     accident: 'Accident',
     road_works: 'Roadworks',
+    cancel: 'Cancel'
 });

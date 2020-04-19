@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl.macro';
+import {defineMessages} from 'react-intl';
 
 export default defineMessages({
     doesnt_know_location: 'App doesn\'t know your location',
