@@ -6,5 +6,8 @@ export function useAddPin(options) {
         method: 'post',
         ...options
     }, {manual: true});
-    return [({type, coordinates}) => execute({data: {type, coordinates}}), payload];
+    return [async ({type, coordinates}) => {
+        const {data} = await execute({data: {type, coordinates}});
+        return data;
+    }, payload];
 }

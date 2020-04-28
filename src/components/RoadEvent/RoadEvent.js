@@ -51,9 +51,13 @@ export function RoadEvent({id}) {
         return null;
     }
 
-    const createdAt = pin?.created_at;
-    const type = pin?.type;
-    const who = pin?.from;
+    const {
+        created_at: createdAt,
+        from: who,
+        confirmed,
+        rejected,
+        type,
+    } = pin;
 
     const classNames = classnames('road-event-heading', {
         [`road-event-heading-${type}`]: type
@@ -73,11 +77,13 @@ export function RoadEvent({id}) {
             <div className="road-event-controls">
                 <Button className="road-event-control road-event-control-reject"
                         variant="danger"
+                        disabled={rejected}
                         onClick={() => rejectPin(id).then(({data}) => setPin(data))}/>
                 <Button className="road-event-control road-event-control-comments"
                         variant="primary"/>
                 <Button className="road-event-control road-event-control-confirm"
                         variant="primary"
+                        disabled={confirmed}
                         onClick={() => confirmPin(id).then(({data}) => setPin(data))}/>
             </div>
         </div>

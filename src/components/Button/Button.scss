@@ -39,4 +39,8 @@
   &-tertiary {
     background-color: $color-tertiary;
   }
+
+  &:disabled {
+    background-color: $color-disabled;
+  }
 }

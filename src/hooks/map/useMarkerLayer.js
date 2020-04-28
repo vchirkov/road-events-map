@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import useAxios from 'axios-hooks';
-import {stringify} from 'query-string/index';
+import {stringify} from 'query-string';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import {GeoJSON} from 'ol/format';
@@ -8,7 +8,7 @@ import {transformExtent} from 'ol/proj';
 import {bbox} from 'ol/loadingstrategy';
 import useInterval from '@use-it/interval';
 
-import {REFRESH_INTERVAL} from '../../constants';
+import {MARKERS_REFRESH_INTERVAL} from '../../constants';
 
 import {RoadEventFeature} from '../../util/features/RoadEventFeature';
 
@@ -20,7 +20,7 @@ export function useMarkerLayer() {
         strategy: bbox,
         loader: async (extent) => {
             execute({
-                url: `/pins?${stringify({
+                url: `/pins/extent?${stringify({
                     extent: transformExtent(extent, 'EPSG:3857', 'EPSG:4326')
                 })}`
             }).then(({data}) => {
@@ -39,7 +39,7 @@ export function useMarkerLayer() {
         markerSource.changed();
     };
 
-    useInterval(refresh, REFRESH_INTERVAL);
+    useInterval(refresh, MARKERS_REFRESH_INTERVAL);
 
     return [markerLayer, {
         loading,

@@ -6,6 +6,6 @@ export function useView() {
     return useState(() => new View({
         maxResolution: sizeToResolution(3000),
         minResolution: sizeToResolution(100),
-        resolution: sizeToResolution(500)
+        resolution: sizeToResolution(1000)
     }));
 }

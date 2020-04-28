@@ -16,6 +16,7 @@ import {Button} from '../../components/Button';
 import {useView} from '../../hooks/map/useView';
 import {useTileLayer} from '../../hooks/map/useTileLayer';
 import {useMarkerLayer} from '../../hooks/map/useMarkerLayer';
+import {useNotifyOnPinsNear} from '../../hooks/map/useNotifyOnPinsNear';
 import {useAddPin} from '../../hooks/pins/useAddPin';
 
 import messages from './messages';
@@ -28,11 +29,13 @@ export function App() {
     const [markerLayer, {refresh}] = useMarkerLayer();
     const [addPin] = useAddPin();
 
+    useNotifyOnPinsNear(view);
+
     const handleSubmitRoadEvent = async (type) => {
         const coordinates = toLonLat(view.getCenter());
-        await addPin({type, coordinates});
+        const pin = await addPin({type, coordinates});
         refresh();
-        history.push('/');
+        history.push(`/road-events/${pin._id}`);
     };
 
     const handleShowRoadEvent = (id) => {

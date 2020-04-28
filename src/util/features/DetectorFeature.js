@@ -3,9 +3,11 @@ import Style from 'ol/style/Style';
 import {Fill} from 'ol/style';
 import {circular} from 'ol/geom/Polygon';
 
+import {DETECTION_RADIUS} from '../../constants';
+
 export class DetectorFeature extends Feature {
     constructor(center) {
-        super(circular(center, 200, 64).transform('EPSG:4326', 'EPSG:3857'));
+        super(circular(center, DETECTION_RADIUS, 64).transform('EPSG:4326', 'EPSG:3857'));
         this.center = center;
         this.setStyle(new Style({
             fill: new Fill({

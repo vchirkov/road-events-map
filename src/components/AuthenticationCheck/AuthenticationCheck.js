@@ -18,7 +18,7 @@ export function AuthenticationCheck({children}) {
 
     return (
         <>
-            {children}
+            {isAuthenticated && children}
             {!isAuthenticated && (
                 <div className="authentication-check">
                     {isAuthenticated === false ? (

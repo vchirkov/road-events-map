@@ -1,10 +1,10 @@
-import {useState, useMemo, useEffect} from 'react';
-import {Geolocation} from 'ol';
+import {useState, useMemo} from 'react';
 import {Vector as VectorLayer} from 'ol/layer';
 import {Vector as VectorSource} from 'ol/source';
 import {MarkerFeature} from '../../util/features/MarkerFeature';
 import {useTrackLocation} from '../useTrackLocation';
 import {DetectorFeature} from '../../util/features/DetectorFeature';
+import {useGeolocation} from './useGeolocation';
 
 export function useLocationLayer(view) {
     const [{isRotate, isFocus}] = useTrackLocation();
@@ -22,52 +22,23 @@ export function useLocationLayer(view) {
         })
     }), [features]);
 
-    const geolocation = useMemo(() => new Geolocation({
-        projection: view.getProjection(),
-        enableHighAccuracy: true
-    }), [view]);
+    const onLocationChange = useMemo(() => {
+        return ({heading, position} = {}) => {
+            if (isRotate && !isNaN(heading)) {
+                view.setRotation(-heading);
+            }
 
-    const update = () => {
-        if (!geolocation || !view || !features) return;
+            if (position) {
+                features.forEach(f => f.move(position));
+            }
 
-        updateHeading();
-        updatePosition();
-    };
-
-    const updateHeading = () => {
-        const heading = geolocation.getHeading();
-
-        if (isRotate && !isNaN(heading)) {
-            view.setRotation(-heading);
+            if (position && (isRotate || isFocus)) {
+                view.setCenter(position);
+            }
         }
-    };
+    }, [view, features, isRotate, isFocus]);
 
-    const updatePosition = () => {
-        if (!geolocation.getPosition()) return;
-
-        const coords = geolocation.getPosition();
-
-        features.forEach(f => f.move(coords));
-        if (isRotate || isFocus) {
-            view.setCenter(coords);
-        }
-    };
-
-
-    useEffect(update, [isRotate, isFocus, geolocation, view, features]);
-
-    useEffect(() => {
-        if (!geolocation || !features) return;
-        geolocation.setTracking(true);
-        geolocation.on('change', update);
-
-        update();
-
-        return () => {
-            geolocation.setTracking(false);
-            geolocation.un('change', update);
-        }
-    }, [isRotate, isFocus, geolocation, view, features]);
+    useGeolocation(view, onLocationChange);
 
     return [locationLayer];
 }
