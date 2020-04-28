@@ -9,7 +9,7 @@
     [
       "react-intl-auto",
       {
-        "removePrefix": "(src.app|src.components)"
+        "removePrefix": "(src.app|src.components|src.hooks)"
       }
     ]
   ]

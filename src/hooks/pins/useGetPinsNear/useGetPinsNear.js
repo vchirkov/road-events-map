@@ -4,7 +4,7 @@ import {throttle} from 'lodash';
 import {stringify} from 'query-string';
 import {transform} from 'ol/proj';
 
-import {NOTIFCATION_REFRESH_THROTTLE} from '../../constants';
+import {NOTIFCATION_REFRESH_THROTTLE} from '../../../constants';
 
 export function useGetPinsNear() {
     const [payload, execute] = useAxios({}, {manual: true});

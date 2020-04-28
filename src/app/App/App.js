@@ -2,6 +2,7 @@ import './App.scss';
 
 import React from 'react';
 import {Route, Switch, useHistory} from 'react-router';
+import {ToastContainer} from 'react-toastify';
 import {useIntl} from 'react-intl';
 import {toLonLat} from 'ol/proj';
 
@@ -33,7 +34,7 @@ export function App() {
 
     const handleSubmitRoadEvent = async (type) => {
         const coordinates = toLonLat(view.getCenter());
-        const pin = await addPin({type, coordinates});
+        const {data: pin} = await addPin({type, coordinates});
         refresh();
         history.push(`/road-events/${pin._id}`);
     };
@@ -66,6 +67,8 @@ export function App() {
                                <RoadEvent id={match.params.id}/>
                            )}/>
                 </Switch>
+                <ToastContainer hideProgressBar={true}
+                                limit={1}/>
             </div>
             <div className="app-bottom-section">
                 <Switch>

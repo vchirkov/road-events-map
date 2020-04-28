@@ -1,0 +1,1 @@
+export {useGetPinsForExtent} from './useGetPinsForExtent';

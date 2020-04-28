@@ -19,5 +19,10 @@
   "RoadEventSelector.choose_event_type": "Choose an Event type",
   "RoadEventSelector.patrol": "Police",
   "RoadEventSelector.road_works": "Roadworks",
-  "RoadEventSelector.speed_cam": "Camera"
+  "RoadEventSelector.speed_cam": "Camera",
+  "pins.useAddPin.failed_to_add_pin": "Failed to Add Pin",
+  "pins.useConfirmPin.failed_to_confirm": "Failed to Confirm Pin",
+  "pins.useGetPin.failed_to_get_pin": "Failed Load Pin",
+  "pins.useGetPinsForExtent.failed_to_update": "Failed to Update Pins",
+  "pins.useRejectPin.failed_to_reject": "Failed to Reject Pin"
 }

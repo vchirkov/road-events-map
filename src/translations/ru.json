@@ -19,5 +19,10 @@
   "RoadEventSelector.choose_event_type": "Выберите тип события",
   "RoadEventSelector.patrol": "Полиция",
   "RoadEventSelector.road_works": "Работы",
-  "RoadEventSelector.speed_cam": "Камера"
+  "RoadEventSelector.speed_cam": "Камера",
+  "pins.useAddPin.failed_to_add_pin": "Не удалось добавить событие",
+  "pins.useConfirmPin.failed_to_confirm": "Не удалось подтвердить событие",
+  "pins.useGetPin.failed_to_get_pin": "Не удалось получить событие",
+  "pins.useGetPinsForExtent.failed_to_update": "Не удалост обновить отметки на карте",
+  "pins.useRejectPin.failed_to_reject": "Не удалось отклонить событие"
 }
