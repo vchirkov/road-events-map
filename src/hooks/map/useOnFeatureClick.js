@@ -1,25 +1,19 @@
 import {useEffect} from 'react';
 import {noop} from 'lodash';
 
-import Select from 'ol/interaction/Select';
-
 import {RoadEventFeature} from '../../util/features/RoadEventFeature';
 
 export function useOnFeatureClick(map, onFeatureSelect = noop) {
     useEffect(() => {
-        const select = new Select({
-            filter: feature => feature instanceof RoadEventFeature,
-            style: false
-        });
-
-        select.on('select', (e) => {
-            const feature = e.target.getFeatures().item(0);
+        const onClick = (e) => {
+            const feature = map.getFeaturesAtPixel(e.pixel).find((feature => feature instanceof RoadEventFeature));
             const id = feature && feature.getId();
+
             onFeatureSelect(id, feature);
-        });
+        };
 
+        map.on('click', onClick);
 
-        map.addInteraction(select);
-        return () => map.removeInteraction(select);
+        return () => map.un(onClick);
     }, [map]);
 }
