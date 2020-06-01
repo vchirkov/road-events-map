@@ -13,7 +13,10 @@ export function GeoLocationCheck({children}) {
     const [error, setError] = useState(null);
     const [blinkAwait, setBlinkAwait] = useState(true);
 
-    const triggerGeolocationCheck = () => navigator.geolocation.watchPosition(setAllowed, setError);
+    const triggerGeolocationCheck = () => navigator.geolocation.watchPosition(setAllowed, setError, {
+        enableHighAccuracy: true,
+        timeout: 5000
+    });
 
     useEffect(() => {
         setTimeout(setBlinkAwait, 1000);
