@@ -4,10 +4,10 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 
 import {Loader} from '../Loader';
+import {Button} from '../Button';
 import {useIsAuthenticated} from '../../hooks/user/useIsAuthenticated';
 
 import messages from './messages';
-import {Button} from '../Button';
 
 const {REACT_APP_BOT_URL} = process.env;
 

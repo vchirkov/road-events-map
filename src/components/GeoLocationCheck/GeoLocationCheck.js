@@ -2,12 +2,15 @@ import './GeoLocationCheck.scss';
 
 import React, {useState, useEffect} from 'react';
 import {useIntl} from 'react-intl';
-import classnames from 'classnames';
 
-import messages from './messages';
 import {Loader} from '../Loader';
 
+import {useAuthToken} from '../../hooks/user/useAuthToken';
+
+import messages from './messages';
+
 export function GeoLocationCheck({children}) {
+    const token = useAuthToken();
     const {formatMessage} = useIntl();
     const [allowed, setAllowed] = useState(null);
     const [error, setError] = useState(null);
@@ -44,7 +47,16 @@ export function GeoLocationCheck({children}) {
                                 {formatMessage(messages.doesnt_know_location)}
                             </h1>
                             <p className="geolocation-check-message">
-                                {formatMessage(messages.allow_in_settings)}
+                                {formatMessage(messages.allow_in_settings_or_open_external, {
+                                    or: text => <div className="geolocation-check-or">{text}</div>,
+                                    ref: text => (
+                                        <a className="geolocation-check-ref"
+                                           href={`/#/auth/token/${token}`}
+                                           target="_blank">
+                                            {text}
+                                        </a>
+                                    )
+                                })}
                             </p>
                         </>
                     ) : (

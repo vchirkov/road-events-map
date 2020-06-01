@@ -44,7 +44,7 @@ export function AuthProvider({children}) {
     const user = useGetUser(token);
 
     return (
-        <AuthContext.Provider value={{user, isAuthenticated: !!token && user}}>
+        <AuthContext.Provider value={{user, token, isAuthenticated: !!token && !!user}}>
             {children}
         </AuthContext.Provider>
     );
